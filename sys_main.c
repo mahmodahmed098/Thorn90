@@ -43,13 +43,13 @@
 
 
 /* USER CODE BEGIN (0) */
+#include "can.h"
 /* USER CODE END */
 
 /* Include Files */
 
 #include "sys_common.h"
-#include "can.h"
-#include "sci.h"
+
 /* USER CODE BEGIN (1) */
 /* USER CODE END */
 
@@ -62,20 +62,23 @@
 */
 
 /* USER CODE BEGIN (2) */
-#define size 9
- uint8_t RX_data[size] ={0};
+    #define size 9
+
+  uint8  tx_data[size] = {'H','e','l','l','o',' ','C','A','N'};
 /* USER CODE END */
 
 int main(void)
 {
 /* USER CODE BEGIN (3) */
     canInit();
-    sciInit();
-
-    while(!canIsRxMessageArrived(canREG1, canMESSAGE_BOX1));
-    canGetData(canREG1, canMESSAGE_BOX1, RX_data);
-    sciSend(scilinREG, size, RX_data);
+    canTransmit(canREG1, canMESSAGE_BOX1, tx_data);
 /* USER CODE END */
+    while(1){
+
+
+
+    }
+
 
     return 0;
 }
